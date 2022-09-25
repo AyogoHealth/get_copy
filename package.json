@@ -2,6 +2,35 @@
   "name": "get_copy",
   "version": "1.0.0",
   "description": "Turn a Google spreadsheet of translation strings into a JSON file",
+  "main": "index.js",
+  "exports": "index.js",
+  "bin": {
+    "get_copy": "get_copy_cli.js"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "author": "Ayogo Health Inc. <opensource@ayogo.com>",
-  "license": "MIT"
+  "contributors": [
+    "Adam Vernon <adam@akineticblog.com>",
+    "Darryl Pogue <darryl@dpogue.ca>",
+    "Euan Forrester",
+    "Ian Suda <iansuda@gmail.com>",
+    "Jailson Brito",
+    "Sara Tan"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 16.17.0"
+  },
+  "dependencies": {
+    "opener": "^1.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.59",
+    "@types/opener": "^1.4.0",
+    "typescript": "^4.9.1-beta",
+    "undici": "^5.10.0"
+  }
 }
