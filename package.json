@@ -1,0 +1,7 @@
+{
+  "name": "get_copy",
+  "version": "1.0.0",
+  "description": "Turn a Google spreadsheet of translation strings into a JSON file",
+  "author": "Ayogo Health Inc. <opensource@ayogo.com>",
+  "license": "MIT"
+}
