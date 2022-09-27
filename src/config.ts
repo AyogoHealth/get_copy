@@ -1,10 +1,5 @@
 /*! Copyright 2022 Ayogo Health Inc. */
 
-// TypeScript's @types/node don't include fetch (yet)
-declare global {
-  var fetch: typeof import("undici").fetch;
-}
-
 export type GetCopyOptions = {
   cache_auth_token?: boolean;
   verbose?: boolean;

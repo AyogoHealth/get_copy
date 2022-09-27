@@ -5,6 +5,7 @@ import { CredentialFilePath, GoogleClientID, GoogleClientSecret, OAuth2CallbackP
 import { readFile, writeFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import { randomUUID } from "node:crypto";
+import { fetch } from "undici";
 import opener from "opener";
 
 interface GoogleAuthCredentials {

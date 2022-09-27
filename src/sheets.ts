@@ -1,6 +1,7 @@
 /*! Copyright 2013 - 2022 Ayogo Health Inc. */
 
 import type { GetCopyOptions } from "./config.js";
+import { fetch } from "undici";
 
 interface SpreadsheetResponse {
   spreadsheetId: string;

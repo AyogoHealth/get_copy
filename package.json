@@ -9,6 +9,7 @@
   },
   "type": "module",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ayogo Health Inc. <opensource@ayogo.com>",
@@ -25,12 +26,12 @@
     "node": ">= 16.17.0"
   },
   "dependencies": {
-    "opener": "^1.5.2"
+    "opener": "^1.5.2",
+    "undici": "^5.10.0"
   },
   "devDependencies": {
     "@types/node": "^16.11.59",
     "@types/opener": "^1.4.0",
-    "typescript": "^4.9.1-beta",
-    "undici": "^5.10.0"
+    "typescript": "^4.9.1-beta"
   }
 }
