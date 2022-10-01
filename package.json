@@ -10,7 +10,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run build && tap --node-arg=\"--no-warnings\" --node-arg=\"--loader=esmock\" test/*.test.js"
   },
   "author": "Ayogo Health Inc. <opensource@ayogo.com>",
   "contributors": [
@@ -32,6 +32,12 @@
   "devDependencies": {
     "@types/node": "^16.11.59",
     "@types/opener": "^1.4.0",
-    "typescript": "^4.9.1-beta"
+    "escover": "^2.5.0",
+    "esmock": "^2.0.4",
+    "tap": "^16.3.0",
+    "typescript": "^4.8.4"
+  },
+  "tap": {
+    "reporter": "spec"
   }
 }

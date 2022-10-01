@@ -73,9 +73,7 @@ export function sortObjectKeys<T>(obj: T): T {
     const newObj = {} as typeof obj;
 
     Object.keys(obj).sort().forEach(key => {
-      if (Object.hasOwn(obj, key)) {
-        Reflect.set(newObj, key, sortObjectKeys(Reflect.get(obj, key)));
-      }
+      Reflect.set(newObj, key, sortObjectKeys(Reflect.get(obj, key)));
     });
 
     return newObj as T;
