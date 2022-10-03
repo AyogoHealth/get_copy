@@ -1,6 +1,6 @@
 {
   "name": "@ayogohealth/get_copy",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0-rc.2",
   "description": "Turn a Google spreadsheet of translation strings into a JSON file",
   "main": "index.js",
   "exports": "index.js",
