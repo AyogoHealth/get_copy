@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /*! Copyright 2013 - 2022 Ayogo Health Inc. */
 
 // @ts-ignore: parseArgs not in the typedefs for Node 16, even though it's supported in 16.17.0+
