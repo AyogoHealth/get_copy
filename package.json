@@ -1,7 +1,56 @@
 {
-  "name": "get_copy",
+  "name": "@ayogohealth/get_copy",
   "version": "1.0.0",
   "description": "Turn a Google spreadsheet of translation strings into a JSON file",
+  "main": "index.js",
+  "exports": "index.js",
+  "bin": {
+    "get_copy": "get_copy_cli.js"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && tap --node-arg=\"--no-warnings\" --node-arg=\"--loader=esmock\" test/*.test.js"
+  },
   "author": "Ayogo Health Inc. <opensource@ayogo.com>",
-  "license": "MIT"
+  "contributors": [
+    "Adam Vernon <adam@akineticblog.com>",
+    "Darryl Pogue <darryl@dpogue.ca>",
+    "Euan Forrester",
+    "Ian Suda <iansuda@gmail.com>",
+    "Jailson Brito",
+    "Sara Tan"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 16.17.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AyogoHealth/get_copy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AyogoHealth/get_copy/issues"
+  },
+  "files": [
+    "*.js"
+  ],
+  "dependencies": {
+    "opener": "^1.5.2",
+    "undici": "^5.10.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.59",
+    "@types/opener": "^1.4.0",
+    "escover": "^2.5.0",
+    "esmock": "^2.0.4",
+    "tap": "^16.3.0",
+    "typescript": "^4.8.4"
+  },
+  "tap": {
+    "reporter": "spec"
+  }
 }

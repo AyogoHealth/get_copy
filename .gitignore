@@ -1,0 +1,12 @@
+.DS_Store
+.spreadsheet_auth.json
+*.swp
+*~
+.#*
+.tscache
+*.js
+!*/*.js
+coverage
+.nyc_output/
+node_modules
+npm-debug.log
