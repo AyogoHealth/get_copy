@@ -63,7 +63,7 @@ export function remapSheetValues(opts: GetCopyOptions, sheet: SpreadsheetValuesS
   // Return all the non-empty rows, reduced to a pair of key/value
   return rows
     .map(row => [row[keyIndex], row[valueIndex]] as RowTuple)
-    .filter(row => !!row[0] && !!row[1]);
+    .filter(row => !!row[0]);
 }
 
 export function sortObjectKeys<T>(obj: T): T {
@@ -93,7 +93,7 @@ export function buildLocaleTree(entries: Array<RowTuple>) {
 
       keyparts.forEach((part, idx) => {
         if (idx === (keyparts.length - 1)) {
-          subkey[part] = value;
+          subkey[part] = value || "";
         } else if (subkey[part] === undefined) {
           subkey = subkey[part] = {} as LocaleTree;
         } else {
@@ -101,7 +101,7 @@ export function buildLocaleTree(entries: Array<RowTuple>) {
         }
       });
     } else {
-      tree[key] = value;
+      tree[key] = value || "";
     }
   });
 

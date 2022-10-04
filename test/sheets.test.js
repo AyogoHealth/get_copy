@@ -55,6 +55,12 @@ describe("buildLocaleTree", function() {
     assert.deepEqual(result, { foo: { bar: { baz: "qux" }, asdf: "qwerty" }}, "Converted tuples to object");
   });
 
+  it("should handle key and sub-object keys with empty values", function() {
+    const result = buildLocaleTree([ ["foo.bar.baz", undefined], ["asdf", undefined] ]);
+
+    assert.deepEqual(result, { foo: { bar: { baz: "" }}, asdf: "" }, "Converted tuples to object");
+  });
+
   it("should return sorted keys", function() {
     const result = buildLocaleTree([ ["foo", "bar"], ["asdf", "qwerty"] ]);
     const expected = { asdf: "qwerty", foo: "bar" };
