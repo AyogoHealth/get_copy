@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-/*! Copyright 2013 - 2022 Ayogo Health Inc. */
+/*! Copyright 2013 - 2023 Ayogo Health Inc. */
 
-// @ts-ignore: parseArgs not in the typedefs for Node 16, even though it's supported in 16.17.0+
 import { parseArgs } from "node:util";
 import { writeFile } from "node:fs/promises";
 import type { GetCopyOptions } from "./config.js";
@@ -57,30 +56,30 @@ function output(destPath: string|null, header: string = "") {
 
 const flagOptions = {
   "help": {
-    type: "boolean",
+    type: "boolean" as const,
     short: "h"
   },
   "verbose": {
-    type: "boolean",
+    type: "boolean" as const,
     short: "v"
   },
   "output": {
-    type: "string",
+    type: "string" as const,
     short: "o"
   },
   "key-column": {
-    type: "string",
+    type: "string" as const,
     short: "k"
   },
   "value-column": {
-    type: "string",
+    type: "string" as const,
     short: "c"
   },
   "no-auth-cache": {
-    type: "boolean"
+    type: "boolean" as const
   },
   "header": {
-    type: "string"
+    type: "string" as const
   }
 };
 
@@ -117,7 +116,7 @@ if ("no-auth-cache" in args.values) {
 }
 
 if ("output" in args.values) {
-  outputPath = args.values.output;
+  outputPath = args.values.output!;
 }
 
 if ("key-column" in args.values) {
