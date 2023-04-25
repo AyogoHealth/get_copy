@@ -1,20 +1,16 @@
-/*! Copyright 2022 Ayogo Health Inc. */
+/*! Copyright 2022 - 2023 Ayogo Health Inc. */
 
 import { randomUUID } from "node:crypto";
 import { strict as assert } from "node:assert";
+import { describe, it, beforeEach, afterEach, mock } from "node:test";
 import { strict as importWithMocks } from "esmock";
-import { mockFunction } from "./mockHelper.js";
-
-//import { describe, it, beforeEach, afterEach } from "node:test";
-import tap from "tap";
-const { describe, beforeEach, afterEach, it } = tap.mocha;
 
 const mockAuth = {
-  getGoogleCredentials: mockFunction()
+  getGoogleCredentials: mock.fn()
 };
 
 const mockSheets = {
-  getSpreadsheet: mockFunction()
+  getSpreadsheet: mock.fn()
 };
 
 const { default: getCopyFromSpreadsheet } = await importWithMocks("../index.js", {
@@ -27,20 +23,20 @@ describe("getCopyFromSpreadsheet", function() {
     const access_token = randomUUID();
 
     beforeEach(function() {
-      mockAuth.getGoogleCredentials.resolveWith({ access_token });
-      mockSheets.getSpreadsheet.resolveWith({ title: "Hello World" });
+      mockAuth.getGoogleCredentials.mock.mockImplementation(() => Promise.resolve({ access_token }));
+      mockSheets.getSpreadsheet.mock.mockImplementation(() => Promise.resolve({ title: "Hello World" }));
     });
 
     afterEach(function() {
-      mockAuth.getGoogleCredentials.resetMock();
-      mockSheets.getSpreadsheet.resetMock();
+      mockAuth.getGoogleCredentials.mock.resetCalls();
+      mockSheets.getSpreadsheet.mock.resetCalls();
     });
 
     it("should pass through the provided options", async function() {
       await getCopyFromSpreadsheet("spreadsheet-id", { option: "value" });
 
-      const [authOpts] = mockAuth.getGoogleCredentials.call(0);
-      const [sheetId, opts] = mockSheets.getSpreadsheet.call(0);
+      const [authOpts] = mockAuth.getGoogleCredentials.mock.calls[0].arguments;
+      const [sheetId, opts] = mockSheets.getSpreadsheet.mock.calls[0].arguments;
 
       assert.equal(authOpts.option, "value", "Options passed through");
       assert.equal(opts.option, "value", "Options passed through");
@@ -49,7 +45,7 @@ describe("getCopyFromSpreadsheet", function() {
     it("should acquire and use the Google auth token through", async function() {
       await getCopyFromSpreadsheet("spreadsheet-id");
 
-      const [sheetId, opts] = mockSheets.getSpreadsheet.call(0);
+      const [sheetId, opts] = mockSheets.getSpreadsheet.mock.calls[0].arguments;
 
       assert.equal(opts.access_token, access_token, "Auth token is passed through");
     });
@@ -57,7 +53,7 @@ describe("getCopyFromSpreadsheet", function() {
     it("should pass in the spreadsheet identifier", async function() {
       await getCopyFromSpreadsheet("spreadsheet-id");
 
-      const [sheetId, opts] = mockSheets.getSpreadsheet.call(0);
+      const [sheetId, opts] = mockSheets.getSpreadsheet.mock.calls[0].arguments;
 
       assert.equal(sheetId, "spreadsheet-id", "Spreadsheet ID is passed through");
     });
@@ -71,12 +67,12 @@ describe("getCopyFromSpreadsheet", function() {
 
   describe("unsuccessful authentication re-rejects", function() {
     beforeEach(function() {
-      mockAuth.getGoogleCredentials.rejectWith(new Error("Bad auth"));
+      mockAuth.getGoogleCredentials.mock.mockImplementation(() => Promise.reject(new Error("Bad auth")));
     });
 
     afterEach(function() {
-      mockAuth.getGoogleCredentials.resetMock();
-      mockSheets.getSpreadsheet.resetMock();
+      mockAuth.getGoogleCredentials.mock.resetCalls();
+      mockSheets.getSpreadsheet.mock.resetCalls();
     });
 
     it("should re-raise the error", async function() {
@@ -86,7 +82,7 @@ describe("getCopyFromSpreadsheet", function() {
         assert.fail("Expected to reject");
       } catch (err) {
         assert.equal(err.message, "Bad auth", "Raises the error");
-        assert.equal(mockSheets.getSpreadsheet.called, false, "Stopped after error");
+        assert.equal(mockSheets.getSpreadsheet.mock.callCount(), 0, "Stopped after error");
       }
     });
   });

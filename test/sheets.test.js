@@ -1,14 +1,9 @@
-/*! Copyright 2022 Ayogo Health Inc. */
+/*! Copyright 2022 - 2023 Ayogo Health Inc. */
 
 import { strict as assert } from "node:assert";
-import { strict as importWithMocks } from "esmock";
-import { mockFunction } from "./mockHelper.js";
+import { describe, it, beforeEach, afterEach } from "node:test";
 
-//import { describe, it, beforeEach, afterEach } from "node:test";
-import tap from "tap";
-const { describe, beforeEach, afterEach, it } = tap.mocha;
-
-const { sortObjectKeys, buildLocaleTree } = await importWithMocks("../sheets.js", {});
+const { sortObjectKeys, buildLocaleTree } = await import("../sheets.js");
 
 // NOTE: assert.deepEqual will compare keys unordered, so we have to
 // JSON.stringify the results and compare strings to ensure proper ordering is

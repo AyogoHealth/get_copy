@@ -10,7 +10,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "test": "npm run build && tap --node-arg=\"--no-warnings\" --node-arg=\"--loader=esmock\" test/*.test.js"
+    "test": "npm run build && node --no-warnings --loader=esmock --test test/"
   },
   "author": "Ayogo Health Inc. <opensource@ayogo.com>",
   "contributors": [
@@ -40,17 +40,12 @@
   ],
   "dependencies": {
     "opener": "^1.5.2",
-    "undici": "~5.11.0"
+    "undici": "^5.21.1"
   },
   "devDependencies": {
-    "@types/node": "^16.11.59",
+    "@types/node": "^18.0.0",
     "@types/opener": "^1.4.0",
-    "escover": "^2.5.0",
     "esmock": "^2.0.4",
-    "tap": "^16.3.0",
-    "typescript": "^4.8.4"
-  },
-  "tap": {
-    "reporter": "spec"
+    "typescript": "^5.0.0"
   }
 }
