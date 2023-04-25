@@ -5,9 +5,9 @@ import { strict as assert } from "node:assert";
 import { strict as importWithMocks } from "esmock";
 import { mockFunction } from "./mockHelper.js";
 
-//import { describe, it, beforeEach, afterEach } from "node:test";
-import tap from "tap";
-const { describe, beforeEach, afterEach, it } = tap.mocha;
+import { describe, it, beforeEach, afterEach } from "node:test";
+//import tap from "tap";
+//const { describe, beforeEach, afterEach, it } = tap.mocha;
 
 const mockAuth = {
   getGoogleCredentials: mockFunction()

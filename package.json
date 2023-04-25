@@ -10,7 +10,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "test": "npm run build && tap --node-arg=\"--no-warnings\" --node-arg=\"--loader=esmock\" test/*.test.js"
+    "test": "npm run build && node --no-warnings --loader=esmock --test test/*.test.js"
   },
   "author": "Ayogo Health Inc. <opensource@ayogo.com>",
   "contributors": [
