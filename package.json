@@ -39,11 +39,10 @@
     "*.js"
   ],
   "dependencies": {
-    "opener": "^1.5.2"
+    "open": "^9.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
-    "@types/opener": "^1.4.0",
     "esmock": "^2.0.4",
     "typescript": "^5.0.0"
   }
