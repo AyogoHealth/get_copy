@@ -1,12 +1,11 @@
-/*! Copyright 2022 Ayogo Health Inc. */
+/*! Copyright 2022 - 2023 Ayogo Health Inc. */
 
 import type { GetCopyOptions } from "./config.js";
 import { CredentialFilePath, GoogleClientID, GoogleClientSecret, OAuth2CallbackPort } from "./config.js";
 import { readFile, writeFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import { randomUUID } from "node:crypto";
-import { fetch } from "undici";
-import opener from "opener";
+import open from "open";
 
 interface GoogleAuthCredentials {
   access_token: string;
@@ -111,11 +110,7 @@ export function getGoogleAuthCode() {
     });
 
     server.listen(OAuth2CallbackPort, () => {
-      const hwnd = opener(getGoogleAuthURL(state));
-
-      setTimeout(() => {
-        hwnd.unref();
-      }, 100);
+      open(getGoogleAuthURL(state));
     });
   });
 }
