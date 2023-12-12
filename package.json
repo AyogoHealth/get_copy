@@ -1,6 +1,6 @@
 {
   "name": "@ayogohealth/get_copy",
-  "version": "1.0.0-rc.3",
+  "version": "1.0.0",
   "description": "Turn a Google spreadsheet of translation strings into a JSON file",
   "main": "index.js",
   "exports": "index.js",
@@ -26,7 +26,7 @@
     "node": ">= 16.17.0"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   },
   "repository": {
     "type": "git",
