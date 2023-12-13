@@ -28,7 +28,7 @@ jobs:
       packages: write
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Configure git
         run: |
@@ -36,26 +36,28 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Use Node.js 18
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: npm
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@ayogohealth'
+          registry-url: 'https://registry.npmjs.org'
 
-      - name: npm test
+      - name: Install latest npm
+        run: npm install -g npm
+
+      - name: npm install and test
         run: npm cit
 
       - name: npm version
         run: |
-            npm version ${{ github.event.inputs.version-type == 'Custom' && github.event.inputs.version-str || github.event.inputs.version-type }}
+          npm version ${{ github.event.inputs.version-type == 'Custom' && github.event.inputs.version-str || github.event.inputs.version-type }}
 
       - name: git push
         run: |
-            git push origin --follow-tags
+          git push origin --follow-tags
 
       - name: npm publish
         run: |
-            npm publish --provenance
+          npm publish --provenance
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
